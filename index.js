@@ -19,21 +19,31 @@ const addMovie = (event) => {
   total.appendChild(movie);
   message.innerText = "Movie Added!";
   inputField.value = "";
+  revealMessage();
 };
 
 const deleteMovie = (event) => {
   //   console.log("press");
   event.target.parentNode.remove();
-  message.textContent = "Movie Deleted!";
+  let text = event.target.parentNode.innerText.replace("X", "");
+  console.log(text);
+  message.textContent = `${text} deleted!`;
+  revealMessage();
 };
 
 const crossOffMovie = (event) => {
   event.target.classList.toggle("checked");
   if (event.target.classList.contains("checked")) {
-    message.textContent = "Movie watched!";
+    message.textContent = `${event.target.textContent} watched!`;
   } else {
-    message.textContent = "Movie added back!";
+    message.textContent = `${event.target.textContent}  added back!`;
   }
+  revealMessage();
+};
+
+const revealMessage = () => {
+  message.classList.remove("hide");
+  setTimeout(() => message.classList.add("hide"), 1000);
 };
 
 document.querySelector("form").addEventListener("submit", addMovie);
